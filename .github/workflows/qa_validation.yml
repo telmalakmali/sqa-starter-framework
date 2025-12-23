@@ -1,0 +1,44 @@
+name: QA Framework Validation
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate required folders exist
+        run: |
+          test -d qa || (echo "Missing folder: qa/" && exit 1)
+          test -d docs || (echo "Missing folder: docs/" && exit 1)
+          test -d .github/workflows || (echo "Missing folder: .github/workflows/" && exit 1)
+
+      - name: Validate required QA artefacts exist
+        run: |
+          test -f README.md || (echo "Missing file: README.md" && exit 1)
+          test -f LICENSE || (echo "Missing file: LICENSE" && exit 1)
+
+          # Entry/Exit criteria PDFs
+          test -f qa/entry_criteria.pdf || (echo "Missing file: qa/entry_criteria.pdf" && exit 1)
+          test -f qa/exit_criteria.pdf || (echo "Missing file: qa/exit_criteria.pdf" && exit 1)
+
+      - name: Validate automation scripts exist
+        run: |
+          test -d scripts || (echo "Missing folder: scripts/" && exit 1)
+          test -f scripts/track_foodme_changes.py || (echo "Missing file: scripts/track_foodme_changes.py" && exit 1)
+
+      - name: Validate tracking file exists
+        run: |
+          test -d tracking || (echo "Missing folder: tracking/" && exit 1)
+          test -f tracking/foodme-app_dev.sha || (echo "Missing file: tracking/foodme-app_dev.sha" && exit 1)
+
+      - name: Success message
+        run: echo "QA framework validation passed ✅"
