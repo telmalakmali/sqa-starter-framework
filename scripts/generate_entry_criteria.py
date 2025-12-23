@@ -3,7 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 
 # Output file path
-output_path = "qa/entry_criteria.pdf"
+output_path = "../qa/entry_criteria.pdf"
 
 # Layout settings
 LEFT_MARGIN = 72
