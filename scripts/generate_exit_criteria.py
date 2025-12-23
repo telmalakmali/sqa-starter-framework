@@ -2,7 +2,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 
-output_path = "../qa/entry_criteria.pdf"
+output_path = "../qa/exit_criteria.pdf"
 
 # Layout Settings
 LEFT_MARGIN = 72
