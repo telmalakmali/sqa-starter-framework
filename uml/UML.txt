@@ -1,0 +1,81 @@
+@startuml
+title QA Workflow (Manual) - Readiness to Sign-off
+
+start
+:Release received;
+
+if (QA entry criteria met?) then (Yes)
+
+  if (New feature included?) then (Yes)
+    :Create feature test list;
+    :Execute feature testing;
+
+    if (Feature tests passed?) then (Yes)
+      :Execute regression testing;
+
+      if (Regression passed?) then (Yes)
+        :Execute smoke testing;
+      else (No)
+        :QA sign-off not provided;
+        note right
+          Partial / conditional sign-off
+          only if requested by management
+        end note
+        stop
+      endif
+
+    else (No)
+      :QA sign-off not provided;
+      note right
+        Partial / conditional sign-off
+        only if requested by management
+      end note
+      stop
+    endif
+
+  else (No)
+
+    if (Bug fixes included?) then (Yes)
+      :Validate bug fixes;
+
+      if (Bug fix validation passed?) then (Yes)
+        :Execute smoke testing;
+      else (No)
+        :QA sign-off not provided;
+        note right
+          Partial / conditional sign-off
+          only if requested by management
+        end note
+        stop
+      endif
+
+    else (No)
+      :Execute smoke testing;
+    endif
+
+  endif
+
+  if (Smoke testing passed?) then (Yes)
+
+    if (Exit criteria met?) then (Yes)
+      :QA sign-off provided;
+      :Release approved;
+      stop
+    else (No)
+      :QA sign-off not provided;
+      :Fix gaps to meet exit criteria;
+      stop
+    endif
+
+  else (No)
+    :QA sign-off not provided;
+    stop
+  endif
+
+else (No)
+  :Return to development;
+  :QA cannot start testing;
+  stop
+endif
+
+@enduml

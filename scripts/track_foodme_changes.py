@@ -10,20 +10,20 @@ from pathlib import Path
 # This value corresponds to the first part of the GitHub repository URL.
 #
 # Example repository used in this project:
-# https://github.com/favour-nz/foodme-app
+# https://github.com/..................
 #
 # In this case:
-# OWNER = "favour-nz"
-OWNER = "favour-nz"
+# OWNER = "add_value"
+OWNER = "add_value"
 
 # REPO:
 # The name of the GitHub repository being monitored.
 # This corresponds to the second part of the repository URL.
 #
 # Example:
-# https://github.com/favour-nz/foodme-app
-# REPO = "foodme-app"
-REPO = "foodme-app"
+# https://github.com/..................
+# REPO = "add_value"
+REPO = "add_value"
 
 # BRANCH:
 # The branch of the repository that will be monitored for changes.
@@ -34,7 +34,7 @@ BRANCH = os.getenv("TARGET_BRANCH", "dev")
 # =========================================================
 # AUTHENTICATION CONFIGURATION
 # =========================================================
-# FOODME_TOKEN:
+# VALUE_TOKEN:
 # A GitHub Personal Access Token (classic) stored securely
 # as a GitHub Actions repository secret.
 #
@@ -44,9 +44,9 @@ BRANCH = os.getenv("TARGET_BRANCH", "dev")
 # IMPORTANT:
 # - The token value is never stored in the codebase.
 # - It is injected securely at runtime through GitHub Actions.
-TOKEN = os.getenv("FOODME_TOKEN")
+TOKEN = os.getenv("VALUE_TOKEN")
 if not TOKEN:
-    raise SystemExit("FOODME_TOKEN is missing")
+    raise SystemExit("VALUE_TOKEN is missing")
 
 # HTTP headers required for authenticated GitHub API requests
 HEADERS = {
